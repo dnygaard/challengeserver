@@ -1,30 +1,21 @@
 var cc          = require('config-multipaas'),
-    restify     = require('restify'),
-    fs          = require('fs')
+    express = require('express');
 
 var config      = cc(),
-    app         = restify.createServer()
+    app = express();
 
-app.use(restify.queryParser())
-app.use(restify.CORS())
-app.use(restify.fullResponse())
 
-// Routes
-app.get('/status', function (req, res, next)
-{
-  res.send("{status: 'ok'}");
+app.get('/', function (req, res) {
+	res.send('hallo verden 1');
 });
 
-app.get('/', function (req, res, next)
-{
-  var data = fs.readFileSync(__dirname + '/index.html');
-  res.status(200);
-  res.header('Content-Type', 'text/html');
-  res.end(data.toString().replace(/host:port/g, req.header('Host')));
-});
+// var ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+//var port  = process.env.OPENSHIFT_NODEJS_PORT || 3000;
+//app.listen(port, ip);
+//app.listen(3000);
 
-app.get(/\/(css|js|img)\/?.*/, restify.serveStatic({directory: './static/'}));
 
 app.listen(config.get('PORT'), config.get('IP'), function () {
   console.log( "Listening on " + config.get('IP') + ", port " + config.get('PORT') )
 });
+
