@@ -1,8 +1,14 @@
 var cc          = require('config-multipaas'),
-    express = require('express');
+    bodyParser  = require('body-parser'),
+	multer      = require('multer'),
+    express     = require('express');
 
 var config      = cc(),
     app = express();
+	
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(multer());	
 
 
 app.get('/', function (req, res) {
@@ -11,10 +17,11 @@ app.get('/', function (req, res) {
 
 //app.use(express.static(__dirname + '/public')); // supply access ot ./public/index.html ++
 
-app.get('/api/challenge/', function(req, res) {
+app.get('/api/challenge', function(req, res) {
 	res.send('list all ');
 });
-app.post('/api/challenge/add', function(req, res) {
+
+app.post('/api/challenge', function(req, res) {
 	res.send('add new  challenger');
 });
 
