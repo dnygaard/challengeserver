@@ -6,14 +6,17 @@ var config      = cc(),
 
 
 app.get('/', function (req, res) {
-	res.send('hallo verden 1');
+	res.send('hallo verden 2');
 });
 
-// var ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
-//var port  = process.env.OPENSHIFT_NODEJS_PORT || 3000;
-//app.listen(port, ip);
-//app.listen(3000);
+//app.use(express.static(__dirname + '/public')); // supply access ot ./public/index.html ++
 
+app.get('/api/challenge/', function(req, res) {
+	res.send('list all ');
+});
+app.post('/api/challenge/add', function(req, res) {
+	res.send('add new  challenger');
+});
 
 app.listen(config.get('PORT'), config.get('IP'), function () {
   console.log( "Listening on " + config.get('IP') + ", port " + config.get('PORT') )
