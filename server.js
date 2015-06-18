@@ -19,6 +19,7 @@ if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
 					  + process.env.OPENSHIFT_MONGODB_PORT        + '/' 
 					  + process.env.OPENSHIFT_APP_NAME
 };
+//var db = mongojs('username:password@example.com/mydb', ['mycollection']);
 
 var mongojs = require('mongojs');
 //var db = mongojs('ndc', ['utfordrer']);
@@ -31,12 +32,19 @@ app.get('/', function (req, res) {
 
 app.get('/api/challenge', function(req, res) {
 	db.utfordrer.find().toArray(function(err, items) {
-		res.send(items);
+		if (err) {
+                res.send("An error has occurred: " + err);
+        } else {
+		        res.send(items);
+	    }	
 	});
 })
 
-app.post('/api/challenge', function(req, res) {
-	res.send('TODO add new  challenger');
+app.post('/api/challenge', function(req, res) {	
+    var challenger_body = req.body;
+    console.log('Adding challenger: ' + JSON.stringify(challenger_body));
+    db.utfordrer.insert(challenger_body);
+	res.send("done");
 });
 
 
