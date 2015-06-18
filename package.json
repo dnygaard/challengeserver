@@ -25,6 +25,7 @@
   "dependencies": {
     "body-parser": "^1.13.1",
     "config-multipaas": "^0.1.0",
+    "mongojs": "^1.0.1",
     "multer": "^0.1.8",
     "restify": "^2.8.3"
   },
