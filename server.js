@@ -10,6 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(multer());	
 
+
 var connection_string = '127.0.0.1:27017/ndc';
 if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
  	console.log("Using remote DB");
@@ -21,13 +22,17 @@ if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
 };
 //var db = mongojs('username:password@example.com/mydb', ['mycollection']);
 
+
+
 var mongojs = require('mongojs');
 //var db = mongojs('ndc', ['utfordrer']);
 var db = mongojs(connection_string, ['utfordrer']);
 
 
 app.get('/', function (req, res) {
-	res.send('Sanity check version 4');
+	res.send('Sanity check version 6' + process.env.OPENSHIFT_MONGODB_HOST        + ':' 
+					  + process.env.OPENSHIFT_MONGODB_PORT        + '/' 
+					  + process.env.OPENSHIFT_APP_NAME);
 });
 
 app.get('/api/challenge', function(req, res) {
@@ -39,6 +44,7 @@ app.get('/api/challenge', function(req, res) {
 	    }	
 	});
 })
+
 
 app.post('/api/challenge', function(req, res) {	
     var challenger_body = req.body;
