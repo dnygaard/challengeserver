@@ -1,0 +1,52 @@
+<html  ng-app="capp">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+	<script type="text/javascript" src="/app.js"></script>
+	<style>thead {color:green;}
+           tbody {color:blue;}
+           table,th,td
+           {border:1px solid black; margin: auto;}
+    </style>
+  </head>
+  
+  <body>
+  
+  
+	<div>
+      <input type="text" ng-model="yourName" placeholder="Enter a name here">
+      <h1>Hello, {{ yourName }}!</h1>
+    </div>
+	
+	
+	<div ng-controller="ChallengeController">
+	
+	 <table class="table table-bordered" cellpadding="10">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Time</th>
+		<th> &nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="result in resultlist">
+          <td>{{ result.navn }} </td>
+		  <td>{{ result.epost }} </td>
+		  <td>{{ result.tid }}</td>
+		  <td> &nbsp; </td>
+      </tr>
+	  
+	   <tr class="form-control">
+          <td><input type="text" name="navn" ng-model="user.navn" > </td>
+		  <td> <input type="text" name="epost" ng-model="user.epost" ></td>
+		  <td> <input type="text" name="tid" ng-model="user.tid" ></td>
+		  <td> <button ng-click="add(user)"class="btn btn-success">ADD</button></td>
+      </tr>
+    </tbody>
+  </table>
+	
+    </div>
+	  
+  </body>
+</html>
