@@ -1,51 +1,31 @@
-Node.js on OpenShift
+ChallengeServer - a little MEAN challenge resultpage
 ====================================================================
-This package includes a dynamic Node.js build stage that will provide your application with a customized Node.js runtime.
-The version of Node that is available will depend on the requirements listed in your application's `package.json` file.
 
-See: `.openshift/action_hooks/` for more informaiton on how the OpenShift build process works.
+This package was created as a very simple one-page competition resultboard with a full MEAN stack. The intended competition is over, but this project is made public for historic and documentational purposes. Do feel free to clone and change for your own use.
+
+A live version of [ChallengeServer](http://cserver-systek.rhcloud.com/) is hosted on [Red Hat's Open Hybrid Cloud Application Platform](https://www.openshift.com/). Please test and prod at it, but leave it as you found it.
+Note that if the server is not used and/or maintained regularly, it will probably be hibernated.
+
 
 Basic Setup
 -----------
 
-If this is your first time using OpenShift Online or Node.js, you'll have some quick prep-work to do:
+ChallengeServer is a tiny NodeJs server that uses the Express Web framework with AngularJs and MongoDB in the backend. 
+The single page has three functions:
+ * Add a new Contestant with Name, Email and a decimal number representing time spent competing, i.e. a two-decimal real number.
+ * Delete an existing Contestant in the list.
+ * List contestants in order of least time spent competing first.
+ 
+The project uses MongoJs instead of Mongoose in the mid-layer.  
 
-1. [Create an OpenShift Online account](http://openshift.redhat.com/app/account/new)
-2. If you don't already have the rhc (Red Hat Cloud) command-line tools, run: `sudo gem install rhc`
-3. Run `rhc setup` to link your OpenShift Online account with your local development environment, and to select an application namespace
-4. [Download and install Node.js](http://nodejs.org) for use in your local development environment: http://nodejs.org
+No time was used to make the application and server secure or fault-tolerant. Modularization would be a natural next development step. 
+The project is a hack for one-time use and a starting point for future prototyping projects.
 
-If you need any additional help getting started, these links may come in handy:
 
- * https://openshift.redhat.com/community/get-started#cli
- * https://openshift.redhat.com/community/developers/rhc-client-tools-install
+Sources and inspiration, and obstacles
+--------------------------------------
 
-Host your Node.js applications on OpenShift
--------------------------------------------
+Most of the code in this project has been collected from tutorials and webcasts such as Jose Annunziato's talk/videoed class [Web Dev - 4550](https://www.youtube.com/watch?v=34951nhtQco)
 
-Create a Node.js application.  This example will produce an application named **nodeapp**:
+Some of the tutorials and webcasts has also been the source of frustration as keeping up with Web Development libraries is working with a constant moving target - many libraries change often and are not always backward compatible, i.e. the tutorials are often outdated....
 
-    rhc app create nodeapp nodejs --from-code=git://github.com/ryanj/nodejs-custom-version-openshift.git
-
-The above example will output a folder named after your application which contains your local development source.  Make sure to run it from within a directory where you would like to store your development code.
-
-That's it!  You should be able to access your application at:
-
-    http://nodeapp-$yournamespace.rhcloud.com
-
-If your app requires a specific version of Node.js, just update the 'engines' section of your app's `package.json` file to specify your runtime requirements:
-
-    "engines": {
-        "node": ">= 0.12.0"
-     },
-
-Commit your changes locally:
-
-    git add package.json
-    git commit -m 'updating package.json to select Node.js version 0.10.38'
-
-Then push your updates to OpenShift
-
-    git push
-
-Additional updates can be made via the same `git add`, `git commit`, and `git push` workflow.
