@@ -21,7 +21,7 @@ app.get('/ver', function (req, res) {
 });
 
 app.get('/api/challenge', function(req, res) {
-	db.utfordrer.find().sort({ "tid":-1 }).toArray(function(err, items) {
+	db.utfordrer.find().sort({ "minutes":1 }).toArray(function(err, items) {
 		if (err) {
                 res.send("An error has occurred: " + err);
         } else {
@@ -35,7 +35,7 @@ app.post('/api/challenge', function(req, res) {
     var challenger_body = req.body;
     console.log('Adding challenger: ' + JSON.stringify(challenger_body));
     db.utfordrer.insert(challenger_body);
-	db.utfordrer.find().sort({ "tid":-1 }).toArray(function(err, items) {
+	db.utfordrer.find().sort({ "minutes":1 }).toArray(function(err, items) {
 		if (err) {
                 res.send("An error has occurred: " + err);
         } else {
@@ -51,7 +51,7 @@ app.delete('/api/challenge/:id', function (req, res) {
             res.send("An error when attempting to delete: " + err);
         } else {			
 	        console.log("Deleted challenger with id:" + id);		  
-		    db.utfordrer.find().sort({ "tid":-1 }).toArray(function(err, items) {
+		    db.utfordrer.find().sort({ "minutes":1 }).toArray(function(err, items) {
 		        if (err) {
                     res.send("An error has occurred: " + err);
                 } else {

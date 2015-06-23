@@ -18,35 +18,35 @@
       </h1>
     </div>
     <p>Results for the CSS Challenge contenders.</p>	
-
+    <span class="form-control"></span>
    <div ng-controller="ChallengeController">	
 	 <table class="table table-bordered" cellpadding="10">
      <thead>
       <tr>
         <th>Name</th>
         <th>Email</th>
-        <th>Time</th>
+        <th>Minutes</th>
 		<th> &nbsp;</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="result in resultlist">
-          <td>{{ result.navn }} </td>
-		  <td>{{ result.epost }} </td>
-		  <td>{{ result.tid }}</td>
+          <td>{{ result.name }} </td>
+		  <td>{{ result.email }} </td>
+		  <td>{{ result.minutes }}</td>
 		  <td> <button ng-click="delete(result._id)" class="btn btn-danger">DELETE</button> </td>
       </tr>
 	  
-	   <tr class="form-control">
-          <td><input type="text" name="navn" ng-model="user.navn" > </td>
-		  <td> <input type="text" name="epost" ng-model="user.epost" ></td>
-		  <td> <input type="text" name="tid" ng-model="user.tid" ></td>
+	   <tr >
+          <td><input type="text" name="name" ng-model="user.name" > </td>
+		  <td> <input type="email" name="email" ng-model="user.email" ></td>
+		  <td> <input type="number" step="0.01" name="minutes" ng-model="user.minutes" ></td>
 		  <td> <button ng-click="add(user)"class="btn btn-success">ADD</button></td>
       </tr>
     </tbody>
   </table>
 	
     </div>
-	  
+	  </span>
   </body>
 </html>

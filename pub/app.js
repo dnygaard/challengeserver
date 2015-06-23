@@ -11,16 +11,16 @@ app.controller("ChallengeController",
 			  $scope.resultlist = response;
          });
 		 $scope.add = function(user) {
-			 var request_body =  { "navn" : user.navn, "epost" : user.epost, "tid" : user.tid };
+			 var request_body =  { "name" : user.name, "email" : user.email, "minutes" : user.minutes };
 			 $http.post('/api/challenge', request_body)
 	              .success(function (response) {
 			 $scope.zide = {
                   title: "Success"
               };			  
 			  $scope.resultlist = response;
-			  user.navn = "";
-			  user.epost = "";
-			  user.tid = "";
+			  user.name = "";
+			  user.email = "";
+			  user.minutes = "";
             });
 		 };
          $scope.delete = function(id) {
