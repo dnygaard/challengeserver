@@ -12,18 +12,16 @@
   </head>
   
   <body>
-  
-  
-	<div>
-      <input type="text" ng-model="yourName" placeholder="Enter a name here">
-      <h1>Hello, {{ yourName }}!</h1>
+    <div class="page-header">
+      <h1>CSS Challenge Resultlist
+        <small>2015</small>
+      </h1>
     </div>
-	
-	
-	<div ng-controller="ChallengeController">
-	
+    <p>Results for the CSS Challenge contenders.</p>	
+
+   <div ng-controller="ChallengeController">	
 	 <table class="table table-bordered" cellpadding="10">
-    <thead>
+     <thead>
       <tr>
         <th>Name</th>
         <th>Email</th>
