@@ -25,7 +25,7 @@ app.get('/api/challenge', function(req, res) {
 		if (err) {
                 res.send("An error has occurred: " + err);
         } else {
-		        res.send(items);
+		        res.send(items); /* could have been res.json(items); */
 	    }	
 	});
 })
@@ -44,6 +44,23 @@ app.post('/api/challenge', function(req, res) {
 	});
 });
 
+app.delete('/api/challenge/:id', function (req, res) {
+	var id = db.ObjectId(req.params.id);
+	db.utfordrer.remove({"_id": id},function(err, docs) {
+		if (err) {
+            res.send("An error when attempting to delete: " + err);
+        } else {			
+	        console.log("Deleted challenger with id:" + id);		  
+		    db.utfordrer.find().sort({ "tid":-1 }).toArray(function(err, items) {
+		        if (err) {
+                    res.send("An error has occurred: " + err);
+                } else {
+		            res.send(items);
+	            }	
+	        });
+	    }	
+	});	
+});
 
 app.listen(config.get('PORT'), config.get('IP'), function () {
   console.log("Listening on " + config.get('IP') + ", port " + config.get('PORT') )

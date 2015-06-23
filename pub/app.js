@@ -1,11 +1,9 @@
 var app = angular.module('capp', []);
 
-
-
 app.controller("ChallengeController",
   function ($scope, $http) {
 	  $scope.resultList = [];
-  $http.get('/api/challenge')
+      $http.get('/api/challenge')
          .success(function (response) {
 			 $scope.zide = {
                   title: "Success"
@@ -23,8 +21,13 @@ app.controller("ChallengeController",
 			  user.navn = "";
 			  user.epost = "";
 			  user.tid = "";
-         });
+            });
 		 };
-  
+         $scope.delete = function(id) {
+			 $http.delete('/api/challenge/' + id)
+			    .success(function (response) {
+			      $scope.resultlist = response;
+            });
+		 };
  });
  
